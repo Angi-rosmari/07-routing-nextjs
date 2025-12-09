@@ -8,7 +8,8 @@ interface FetchNotesResponse {
 
 export async function fetchNotes(
   page: number = 1,
-  search: string = ""
+  search: string = "",
+  tag: string | undefined
 ): Promise<FetchNotesResponse> {
   const response = await axios.get<FetchNotesResponse>(
     "https://notehub-public.goit.study/api/notes",
@@ -23,7 +24,7 @@ export async function fetchNotes(
       },
     }
   );
-  console.log("DATA:", response.data);
+  // console.log("DATA:", response.data);
   return response.data;
 }
 

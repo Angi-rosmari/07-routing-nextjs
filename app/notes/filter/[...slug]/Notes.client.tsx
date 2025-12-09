@@ -19,7 +19,11 @@ interface FetchNotesResponse {
   totalPages: number;
 }
 
-export default function NotesClient() {
+interface NotesClientProps {
+  tag: string | undefined;
+}
+
+export default function NotesClient({ tag }: NotesClientProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -27,8 +31,8 @@ export default function NotesClient() {
   const [debouncedSearch] = useDebounce(search, 300);
 
   const { data } = useQuery<FetchNotesResponse>({
-    queryKey: ["notes", currentPage, debouncedSearch],
-    queryFn: () => fetchNotes(currentPage, debouncedSearch),
+    queryKey: ["notes", currentPage, debouncedSearch, tag],
+    queryFn: () => fetchNotes(currentPage, debouncedSearch, tag),
     placeholderData: keepPreviousData,
   });
 
