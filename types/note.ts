@@ -1,15 +1,23 @@
 export interface Note {
-  id: string;
+  id: number | string;
   title: string;
   content: string;
-  tag: NoteTag | undefined;
   createdAt: string;
   updatedAt: string;
+  tag: NoteTag;
 }
 
 export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 
-export interface NoteFormValues {
+export const tags: string[] = [
+  "Todo",
+  "Work",
+  "Personal",
+  "Meeting",
+  "Shopping",
+];
+
+export interface NewNoteData {
   title: string;
   content: string;
   tag: NoteTag;

@@ -1,16 +1,22 @@
-import css from "./page.module.css";
-import Link from "next/link";
+"use client";
 
-function NotFound() {
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+const NotFound = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => router.push("/"), 3000);
+    return () => clearTimeout(timer);
+  }, [router]);
+
   return (
-    <div style={{ textAlign: "center", marginTop: "20%" }}>
-      <h1 className={css.title}>404 - Page not found</h1>
-      <p className={css.description}>
-        Sorry, the page you are looking for does not exist.
-      </p>
-      <Link href="/">Go back home</Link>
+    <div>
+      <h1>404 - Page not found</h1>
+      <p>Sorry, the page you are looking for does not exist.</p>
     </div>
   );
-}
+};
 
 export default NotFound;
